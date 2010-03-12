@@ -36,6 +36,17 @@ main(){
     inverseLogTransformation(255, bitmapData, bmpInfoHeader.bmp_bytesz);  
     SaveBitmapFile("invlogtrans.bmp", &bmpInfoHeader, &bmpFileHeader, bitmapData);
     free(bitmapData);
+
+
+    bitmapData = (unsigned char*) LoadBitmapFile("lena512.bmp",&bmpInfoHeader, &bmpFileHeader); 
+    gammaTransformation(10, 255, bitmapData, bmpInfoHeader.bmp_bytesz);  
+    SaveBitmapFile("gammatrans1.bmp", &bmpInfoHeader, &bmpFileHeader, bitmapData);
+    free(bitmapData);
+
+    bitmapData = (unsigned char*) LoadBitmapFile("lena512.bmp",&bmpInfoHeader, &bmpFileHeader); 
+    gammaTransformation(0.1, 255, bitmapData, bmpInfoHeader.bmp_bytesz);  
+    SaveBitmapFile("gammatrans2.bmp", &bmpInfoHeader, &bmpFileHeader, bitmapData);
+    free(bitmapData);
     /*bitmapData = (unsigned char*) LoadBitmapFile("lena512.bmp", &bmpInfoHeader, &bmpFileHeader);
     for (n = 0; n < bmpInfoHeader.bmp_bytesz; n++){
         bitmapData[n] = 255 - bitmapData[n];

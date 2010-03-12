@@ -14,7 +14,7 @@ void logTransformation(int c, unsigned char* image, int imageSize);
 
 void inverseLogTransformation(int c, unsigned char* image, int imageSize);
 
-void gammaTransformation(int gamma, int c, unsigned char* image, int imageSize);
+void gammaTransformation(double gamma, int c, unsigned char* image, int imageSize);
 
 #endif
 
