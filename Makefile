@@ -1,9 +1,10 @@
 CC = gcc
-CFLAGS = -Wall 
+CFLAGS = -Wall -W -Wconversion -Wshadow -Wcast-qual -Wwrite-strings  
 objects = test.o loadbmp.o savebmp.o algo.o 
+outputs = gammatrans1.bmp gammatrans2.bmp invert.bmp invlogtrans.bmp logtrans.bmp threshold.bmp
 	
 ChanelRouting: $(objects)
-	gcc $(objects) -o test
+	gcc -lm $(objects) -o test
 
 test.o: bmp.h algo.h
 loadbmp.o: bmp.h
@@ -13,6 +14,6 @@ algo.o: algo.h
 
 .PHONY: clean
 clean:
-	rm -f $(objects) test
+	rm -f $(objects) $(outputs) test
 
 

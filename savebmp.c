@@ -22,7 +22,7 @@ void SaveBitmapFile(char *filename, Bmpfileinfo *bmpInfoHeader, Bmpfileheader *b
         fwrite(&n, 1, sizeof(char),filePtr);
         fwrite(&empty, 1, 1, filePtr);
     } 
-    if (!fseek(filePtr, bmpFileHeader->bmpdata_offset, SEEK_SET)){
+    if (!fseek(filePtr, (long int)bmpFileHeader->bmpdata_offset, SEEK_SET)){
     fwrite(rawImage, 1, bmpInfoHeader->bmp_bytesz, filePtr);
     }
     fclose(filePtr);

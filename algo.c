@@ -6,8 +6,8 @@
 #define EULER 2.7182818284
 
 
-void thresholding(int threshold, unsigned char* image, int imageSize){
-    int n;
+void thresholding(int threshold, unsigned char* image, unsigned int imageSize){
+    unsigned int n;
     for (n = 0; n < imageSize; n++){
         if (image[n] < threshold){
             image[n] = 0;
@@ -18,8 +18,8 @@ void thresholding(int threshold, unsigned char* image, int imageSize){
 }
 
 
-void inverting(unsigned char* image, int imageSize){
-    int n;
+void inverting(unsigned char* image, unsigned int imageSize){
+    unsigned int n;
     for (n = 0; n < imageSize; n++){
         image[n] = 255 - image[n];
     }
@@ -31,8 +31,8 @@ void padding(int paddingWidth, unsigned char* image, int width, int height){}
 
 
 //logs are not correct
-void logTransformation(int c, unsigned char* image, int imageSize){
-    int n;
+void logTransformation(int c, unsigned char* image, unsigned int imageSize){
+    unsigned int n;
     double result;
     double normalizedRange = (double) c;
     double normalizedImage;
@@ -44,8 +44,8 @@ void logTransformation(int c, unsigned char* image, int imageSize){
     }
 }
 
-void inverseLogTransformation(int c, unsigned char* image, int imageSize){
-    int n;
+void inverseLogTransformation(int c, unsigned char* image, unsigned int imageSize){
+    unsigned int n;
     double normalizedRange = (double) c;
     double normalizedImage;
     double result;
@@ -56,14 +56,14 @@ void inverseLogTransformation(int c, unsigned char* image, int imageSize){
     }
 } 
 
-void gammaTransformation(double gamma, int c, unsigned char* image, int imageSize){
-    int n;
+void gammaTransformation(double gammaConst, int c, unsigned char* image, unsigned int imageSize){
+    unsigned int n;
     double normalizedRange = (double) c;
     double normalizedImage; 
     double result;
     for (n = 0; n < imageSize; n++){
         normalizedImage = (double) image[n]/normalizedRange;
-        result = normalizedRange * pow(normalizedImage, gamma);
+        result = normalizedRange * pow(normalizedImage, gammaConst);
         image[n] = (unsigned char) result; 
     }
 }

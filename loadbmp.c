@@ -4,13 +4,10 @@
 
 
 unsigned char *LoadBitmapFile(char *filename, Bmpfileinfo *bmpInfoHeader, Bmpfileheader *bmpFileHeader){
-    int n;
     FILE *filePtr; //our file pointer
     Bmpfilemagic bmpmagic;
     unsigned char *rawImage;  //store image data
-    //int imageIdx=0;  //image index counter
-    //unsigned char tempRGB;  //our swap variable
-    //open filename in read binary mode
+
     filePtr = fopen(filename,"rb");
     if (filePtr == NULL){
         printf("file was not opened\n");
@@ -46,56 +43,15 @@ unsigned char *LoadBitmapFile(char *filename, Bmpfileinfo *bmpInfoHeader, Bmpfil
 
       
     printf("fileptr: %p\n",filePtr);
-    fseek(filePtr, bmpFileHeader->bmpdata_offset, SEEK_SET);
+    fseek(filePtr, (long int)bmpFileHeader->bmpdata_offset, SEEK_SET);
     
     printf("fileptr: %p\n",filePtr);
     rawImage = (unsigned char*)malloc(bmpInfoHeader->bmp_bytesz);
     fread(rawImage,1,bmpInfoHeader->bmp_bytesz, filePtr); 
     fclose(filePtr);
     printf("image address: %p\n", rawImage); 
-    /*printf("first pixel = %2lX\n", (unsigned long)*rawImage);
-    for (n = 0; n<3; n++){    
-        printf("%d pixel = %2lX\n", n, (unsigned long)rawImage[n]);
-    }
-    printf("image address: %p\n", rawImage);*/
+    
     return rawImage;
-/*
-
-    //move file point to the begging of bitmap data
-    fseek(filePtr, bitmapFileHeader.bfOffBits, SEEK_SET);
-
-    //allocate enough memory for the bitmap image data
-    bitmapImage = (unsigned char*)malloc(bitmapInfoHeader->biSizeImage);
-
-    //verify memory allocation
-    if (!bitmapImage)
-    {
-        free(bitmapImage);
-        fclose(filePtr);
-        return NULL;
-    }
-
-    //read in the bitmap image data
-    fread(bitmapImage,1, bitmapInfoHeader->biSizeImage,filePtr);
-
-    //make sure bitmap image data was read
-    if (bitmapImage == NULL)
-    {
-        fclose(filePtr);
-        return NULL;
-    }
-
-    //swap the r and b values to get RGB (bitmap is BGR)
-    for (imageIdx = 0;imageIdx < bitmapInfoHeader->biSizeImage;imageIdx+=3)
-    {
-        tempRGB = bitmapImage[imageIdx];
-        bitmapImage[imageIdx] = bitmapImage[imageIdx + 2];
-        bitmapImage[imageIdx + 2] = tempRGB;
-    }
-
-    //close file and return bitmap iamge data
-    fclose(filePtr);
-    return bitmapImage;*/
 
 }
 

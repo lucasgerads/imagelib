@@ -9,43 +9,50 @@ main(){
     
     Bmpfileheader bmpFileHeader; //our bitmap file header
     unsigned char *bitmapData;
-    unsigned char *outBitmapData;
+    /*unsigned char *outBitmapData;
     unsigned char *mask;
     unsigned char *enhanced;
     int n;
     int m;
     int sum;
-    int height, width;
+    int height, width;*/
+    char filename[] = "lena512.bmp";
+	char filethreshold[] = "threshold.bmp";
+	char fileinvert[] = "invert.bmp";
+	char filelog[] = "logtrans.bmp";
+	char fileinvlog[] = "invlogtrans.bmp";
+	char filegamma1[] = "gammatrans1.bmp";
+	char filegamma2[] = "gammatrans2.bmp";
 
-    bitmapData = (unsigned char*) LoadBitmapFile("lena512.bmp",&bmpInfoHeader, &bmpFileHeader); 
+    bitmapData = LoadBitmapFile(filename ,&bmpInfoHeader, &bmpFileHeader); 
     thresholding(128, bitmapData, bmpInfoHeader.bmp_bytesz);  
-    SaveBitmapFile("threshold.bmp", &bmpInfoHeader, &bmpFileHeader, bitmapData);
+    SaveBitmapFile(filethreshold, &bmpInfoHeader, &bmpFileHeader, bitmapData);
     free(bitmapData);
 
-    bitmapData = (unsigned char*) LoadBitmapFile("lena512.bmp",&bmpInfoHeader, &bmpFileHeader); 
+    bitmapData = LoadBitmapFile(filename,&bmpInfoHeader, &bmpFileHeader); 
     inverting(bitmapData, bmpInfoHeader.bmp_bytesz);  
-    SaveBitmapFile("invert.bmp", &bmpInfoHeader, &bmpFileHeader, bitmapData);
+    SaveBitmapFile(fileinvert, &bmpInfoHeader, &bmpFileHeader, bitmapData);
     free(bitmapData);
 
-    bitmapData = (unsigned char*) LoadBitmapFile("lena512.bmp",&bmpInfoHeader, &bmpFileHeader); 
+    bitmapData = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
     logTransformation(255, bitmapData, bmpInfoHeader.bmp_bytesz);  
-    SaveBitmapFile("logtrans.bmp", &bmpInfoHeader, &bmpFileHeader, bitmapData);
+    SaveBitmapFile(filelog, &bmpInfoHeader, &bmpFileHeader, bitmapData);
     free(bitmapData); 
 
-    bitmapData = (unsigned char*) LoadBitmapFile("lena512.bmp",&bmpInfoHeader, &bmpFileHeader); 
+    bitmapData = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
     inverseLogTransformation(255, bitmapData, bmpInfoHeader.bmp_bytesz);  
-    SaveBitmapFile("invlogtrans.bmp", &bmpInfoHeader, &bmpFileHeader, bitmapData);
+    SaveBitmapFile(fileinvlog, &bmpInfoHeader, &bmpFileHeader, bitmapData);
     free(bitmapData);
 
 
-    bitmapData = (unsigned char*) LoadBitmapFile("lena512.bmp",&bmpInfoHeader, &bmpFileHeader); 
+    bitmapData = LoadBitmapFile(filename,&bmpInfoHeader, &bmpFileHeader); 
     gammaTransformation(10, 255, bitmapData, bmpInfoHeader.bmp_bytesz);  
-    SaveBitmapFile("gammatrans1.bmp", &bmpInfoHeader, &bmpFileHeader, bitmapData);
+    SaveBitmapFile(filegamma1, &bmpInfoHeader, &bmpFileHeader, bitmapData);
     free(bitmapData);
 
-    bitmapData = (unsigned char*) LoadBitmapFile("lena512.bmp",&bmpInfoHeader, &bmpFileHeader); 
+    bitmapData = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
     gammaTransformation(0.1, 255, bitmapData, bmpInfoHeader.bmp_bytesz);  
-    SaveBitmapFile("gammatrans2.bmp", &bmpInfoHeader, &bmpFileHeader, bitmapData);
+    SaveBitmapFile(filegamma2, &bmpInfoHeader, &bmpFileHeader, bitmapData);
     free(bitmapData);
     /*bitmapData = (unsigned char*) LoadBitmapFile("lena512.bmp", &bmpInfoHeader, &bmpFileHeader);
     for (n = 0; n < bmpInfoHeader.bmp_bytesz; n++){
