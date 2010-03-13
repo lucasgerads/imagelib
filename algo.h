@@ -10,11 +10,11 @@ void averaging(int neighborhoodSize, unsigned char* image, int width, int height
 
 void padding(int paddingWidth, unsigned char* image, int width, int height);
 
-void logTransformation(int c, unsigned char* image, unsigned int imageSize);
+void logTransformation(Image* image);
 
-void inverseLogTransformation(int c, unsigned char* image, unsigned int imageSize);
+void inverseLogTransformation(Image* image);
 
-void gammaTransformation(double gamma, int c, unsigned char* image, unsigned int imageSize);
+void gammaTransformation(double gammaConst, Image* image);
 
 #endif
 

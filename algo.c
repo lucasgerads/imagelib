@@ -31,40 +31,42 @@ void padding(int paddingWidth, unsigned char* image, int width, int height){}
 
 
 //logs are not correct
-void logTransformation(int c, unsigned char* image, unsigned int imageSize){
+void logTransformation(Image* image){
     unsigned int n;
     double result;
-    double normalizedRange = (double) c;
+    double normalizedRange = 255.0;
     double normalizedImage;
-    for (n = 0; n < imageSize; n++){ 
-        normalizedImage = (double)image[n]/normalizedRange;
+    for (n = 0; n < image->size; n++){ 
+        normalizedImage = (double)image->raw[n]/normalizedRange;
         result = normalizedRange * log((EULER-1)*normalizedImage + 1);
         //printf("image: %f result: %f\n",normalizedImage,result);
-        image[n] = (unsigned char) result;
+        image->raw[n] = (unsigned char) result;
     }
 }
 
-void inverseLogTransformation(int c, unsigned char* image, unsigned int imageSize){
+
+void inverseLogTransformation(Image* image){
     unsigned int n;
-    double normalizedRange = (double) c;
+    double normalizedRange = 255.0;
     double normalizedImage;
     double result;
-    for (n = 0; n < imageSize; n++){
-        normalizedImage = (double)image[n]/normalizedRange;
+    for (n = 0; n < image->size; n++){
+        normalizedImage = (double)image->raw[n]/normalizedRange;
         result = normalizedRange * (exp(normalizedImage)-1)/EULER;
-        image[n] = (unsigned char) result;
+        image->raw[n] = (unsigned char) result;
     }
 } 
 
-void gammaTransformation(double gammaConst, int c, unsigned char* image, unsigned int imageSize){
+
+void gammaTransformation(double gammaConst, Image* image){
     unsigned int n;
-    double normalizedRange = (double) c;
+    double normalizedRange = 255.0;
     double normalizedImage; 
     double result;
-    for (n = 0; n < imageSize; n++){
-        normalizedImage = (double) image[n]/normalizedRange;
+    for (n = 0; n < image->size; n++){
+        normalizedImage = (double) image->raw[n]/normalizedRange;
         result = normalizedRange * pow(normalizedImage, gammaConst);
-        image[n] = (unsigned char) result; 
+        image->raw[n] = (unsigned char) result; 
     }
 }
 

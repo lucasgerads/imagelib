@@ -29,29 +29,29 @@ main(){
     SaveBitmapFile(fileinvert, &bmpInfoHeader, &bmpFileHeader, image->raw);
     release(image);
 
-	/*
-    bitmapData = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
-    logTransformation(255, bitmapData, bmpInfoHeader.bmp_bytesz);  
-    SaveBitmapFile(filelog, &bmpInfoHeader, &bmpFileHeader, bitmapData);
-    free(bitmapData); 
+	
+    image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
+    logTransformation(image);  
+    SaveBitmapFile(filelog, &bmpInfoHeader, &bmpFileHeader, image->raw);
+    release(image); 
 
-    bitmapData = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
-    inverseLogTransformation(255, bitmapData, bmpInfoHeader.bmp_bytesz);  
-    SaveBitmapFile(fileinvlog, &bmpInfoHeader, &bmpFileHeader, bitmapData);
-    free(bitmapData);
+    image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
+    inverseLogTransformation(image);  
+    SaveBitmapFile(fileinvlog, &bmpInfoHeader, &bmpFileHeader, image->raw);
+    release(image);
 
 
-    bitmapData = LoadBitmapFile(filename,&bmpInfoHeader, &bmpFileHeader); 
-    gammaTransformation(10, 255, bitmapData, bmpInfoHeader.bmp_bytesz);  
-    SaveBitmapFile(filegamma1, &bmpInfoHeader, &bmpFileHeader, bitmapData);
-    free(bitmapData);
+    image = LoadBitmapFile(filename,&bmpInfoHeader, &bmpFileHeader); 
+    gammaTransformation(10, image);  
+    SaveBitmapFile(filegamma1, &bmpInfoHeader, &bmpFileHeader, image->raw);
+    release(image);
 
-    bitmapData = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
-    gammaTransformation(0.1, 255, bitmapData, bmpInfoHeader.bmp_bytesz);  
-    SaveBitmapFile(filegamma2, &bmpInfoHeader, &bmpFileHeader, bitmapData);
-    free(bitmapData);
+    image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
+    gammaTransformation(0.1, image);  
+    SaveBitmapFile(filegamma2, &bmpInfoHeader, &bmpFileHeader, image->raw);
+    release(image);
 
-	*/
+	
     /*
     bitmapData = (unsigned char*) LoadBitmapFile("lena512.bmp", &bmpInfoHeader, & bmpFileHeader);
     height = bmpInfoHeader.height;
