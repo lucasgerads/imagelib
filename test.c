@@ -10,6 +10,7 @@ main(){
     
     Bmpfileheader bmpFileHeader; //our bitmap file header
     Image* image;
+	Image* newImage;
     
     char filename[] = "lena512.bmp";
 	char filethreshold[] = "threshold.bmp";
@@ -18,6 +19,7 @@ main(){
 	char fileinvlog[] = "invlogtrans.bmp";
 	char filegamma1[] = "gammatrans1.bmp";
 	char filegamma2[] = "gammatrans2.bmp";
+	char filepadding[]= "padding.bmp";
 
     image = LoadBitmapFile(filename ,&bmpInfoHeader, &bmpFileHeader); 
     thresholding(128, image);  
@@ -50,8 +52,20 @@ main(){
     gammaTransformation(0.1, image);  
     SaveBitmapFile(filegamma2, &bmpInfoHeader, &bmpFileHeader, image->raw);
     release(image);
-
 	
+	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
+    newImage = padding(20, image);  
+	bmpInfoHeader.width = newImage->width;
+	bmpInfoHeader.height = newImage->height;
+	bmpInfoHeader.bmp_bytesz = newImage->size;		
+    SaveBitmapFile(padding, &bmpInfoHeader, &bmpFileHeader, newImage->raw);
+    release(image);
+	
+	/*
+	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
+	averaging(mask, image);
+	SaveBitmapFile(fileaverage, &bmpInfoHeader, &bmpFileHeader, image->raw);
+	*/
     /*
     bitmapData = (unsigned char*) LoadBitmapFile("lena512.bmp", &bmpInfoHeader, & bmpFileHeader);
     height = bmpInfoHeader.height;

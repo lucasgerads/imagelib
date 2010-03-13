@@ -21,13 +21,36 @@ void thresholding(int threshold, Image* image){
 void inverting(Image* image){
     unsigned int n;
     for (n = 0; n < image->size; n++){
-        image->raw[n] = 255 - image->raw[n];
+        image->raw[n] = (unsigned char) 255 - image->raw[n];
     }
 }
  
-void averaging(int neighborhoodSize, unsigned char* image, int width, int height){}
 
-void padding(int paddingWidth, unsigned char* image, int width, int height){}
+void averaging(unsigned maskSize, Image* image){
+/*	unsigned int n,m;
+	int x,y;
+	unsigned int padSize; 	//padding that will be added on all sides of the image
+	Image* paddedImage;
+	int mask[] = (int*)malloc(sizeof(int)*maskSize*maskSize);
+	int sum;
+	padSize = = mask/2 - 1;
+	paddedImage = padding(image, padSize);
+	for (m = 0; m < image->width; m++){
+		for ( n = 0; n < image->height; n++){
+			sum = 0;
+			for(x = 0; x < maskSize; x++){
+				for(y = 0; y < maskSize; y++){
+					sum += paddedImage[(x+m)*paddedImage->height + (y + n)];
+				}
+			}
+			image->raw[image->height*m + n];
+		}
+	}
+	release	
+*/
+}
+
+
 
 
 //logs are not correct

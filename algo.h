@@ -6,9 +6,9 @@ void thresholding(int threshold, Image* image);
 
 void inverting(Image* image);
 
-void averaging(int neighborhoodSize, unsigned char* image, int width, int height);
+void averaging(unsigned mask, Image* image);
 
-void padding(int paddingWidth, unsigned char* image, int width, int height);
+/*void padding(int padSize, Image* image);*/
 
 void logTransformation(Image* image);
 
