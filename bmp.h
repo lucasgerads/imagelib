@@ -2,6 +2,8 @@
 #define BMP_H
 
 #include <stdint.h>
+#include "image.h"
+
 
 typedef struct tag_Bmpfilemagic{
     unsigned char magic[2];
@@ -30,7 +32,7 @@ uint32_t ncolors;  //number of colors used by the bitmap which are defined in th
 uint32_t nimpcolors;  //number of colors that are important
 }Bmpfileinfo;
 
-unsigned char *LoadBitmapFile(char *filename, Bmpfileinfo *bmpInfoHeader, Bmpfileheader *bmpFileHeader);
+Image* LoadBitmapFile(char *filename, Bmpfileinfo *bmpInfoHeader, Bmpfileheader *bmpFileHeader);
 void SaveBitmapFile(char *filename , Bmpfileinfo *bmpInfoHeader, Bmpfileheader *bmpFileHeader, unsigned char* rawImage); 
 
 #endif

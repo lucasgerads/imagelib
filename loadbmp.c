@@ -3,10 +3,11 @@
 #include <stdio.h>
 
 
-unsigned char *LoadBitmapFile(char *filename, Bmpfileinfo *bmpInfoHeader, Bmpfileheader *bmpFileHeader){
+Image* LoadBitmapFile(char *filename, Bmpfileinfo *bmpInfoHeader, Bmpfileheader *bmpFileHeader){
     FILE *filePtr; //our file pointer
     Bmpfilemagic bmpmagic;
     unsigned char *rawImage;  //store image data
+	Image* image;
 
     filePtr = fopen(filename,"rb");
     if (filePtr == NULL){
@@ -50,8 +51,15 @@ unsigned char *LoadBitmapFile(char *filename, Bmpfileinfo *bmpInfoHeader, Bmpfil
     fread(rawImage,1,bmpInfoHeader->bmp_bytesz, filePtr); 
     fclose(filePtr);
     printf("image address: %p\n", rawImage); 
-    
-    return rawImage;
+
+	/*wrap raw image into a struct*/ 
+	image = (Image*)malloc(sizeof(Image));
+	image->raw = rawImage;
+	image->width = bmpInfoHeader->width;
+	image->height = bmpInfoHeader->height;
+	image->size = bmpInfoHeader->bmp_bytesz;	
+	    
+    return image;
 
 }
 

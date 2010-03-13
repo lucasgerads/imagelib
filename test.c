@@ -2,13 +2,14 @@
 #include <stdlib.h>
 #include "bmp.h"
 #include "algo.h"
+#include "image.h"
 
 int
 main(){
     Bmpfileinfo bmpInfoHeader;
     
     Bmpfileheader bmpFileHeader; //our bitmap file header
-    unsigned char *bitmapData;
+    Image* image;
     
     char filename[] = "lena512.bmp";
 	char filethreshold[] = "threshold.bmp";
@@ -18,16 +19,17 @@ main(){
 	char filegamma1[] = "gammatrans1.bmp";
 	char filegamma2[] = "gammatrans2.bmp";
 
-    bitmapData = LoadBitmapFile(filename ,&bmpInfoHeader, &bmpFileHeader); 
-    thresholding(128, bitmapData, bmpInfoHeader.bmp_bytesz);  
-    SaveBitmapFile(filethreshold, &bmpInfoHeader, &bmpFileHeader, bitmapData);
-    free(bitmapData);
+    image = LoadBitmapFile(filename ,&bmpInfoHeader, &bmpFileHeader); 
+    thresholding(128, image);  
+    SaveBitmapFile(filethreshold, &bmpInfoHeader, &bmpFileHeader, image->raw);
+    release(image);
 
-    bitmapData = LoadBitmapFile(filename,&bmpInfoHeader, &bmpFileHeader); 
-    inverting(bitmapData, bmpInfoHeader.bmp_bytesz);  
-    SaveBitmapFile(fileinvert, &bmpInfoHeader, &bmpFileHeader, bitmapData);
-    free(bitmapData);
+    image = LoadBitmapFile(filename,&bmpInfoHeader, &bmpFileHeader); 
+    inverting(image);  
+    SaveBitmapFile(fileinvert, &bmpInfoHeader, &bmpFileHeader, image->raw);
+    release(image);
 
+	/*
     bitmapData = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
     logTransformation(255, bitmapData, bmpInfoHeader.bmp_bytesz);  
     SaveBitmapFile(filelog, &bmpInfoHeader, &bmpFileHeader, bitmapData);
@@ -48,6 +50,8 @@ main(){
     gammaTransformation(0.1, 255, bitmapData, bmpInfoHeader.bmp_bytesz);  
     SaveBitmapFile(filegamma2, &bmpInfoHeader, &bmpFileHeader, bitmapData);
     free(bitmapData);
+
+	*/
     /*
     bitmapData = (unsigned char*) LoadBitmapFile("lena512.bmp", &bmpInfoHeader, & bmpFileHeader);
     height = bmpInfoHeader.height;

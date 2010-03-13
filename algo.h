@@ -1,10 +1,10 @@
 #ifndef ALGO_H
 #define ALFO_H
+#include "image.h"
 
+void thresholding(int threshold, Image* image); 
 
-void thresholding(int threshold, unsigned char* image, unsigned int imageSize); 
-
-void inverting(unsigned char* image, unsigned int imageSize);
+void inverting(Image* image);
 
 void averaging(int neighborhoodSize, unsigned char* image, int width, int height);
 

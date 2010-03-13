@@ -6,22 +6,22 @@
 #define EULER 2.7182818284
 
 
-void thresholding(int threshold, unsigned char* image, unsigned int imageSize){
+void thresholding(int threshold, Image* image){
     unsigned int n;
-    for (n = 0; n < imageSize; n++){
-        if (image[n] < threshold){
-            image[n] = 0;
+    for (n = 0; n < image->size; n++){
+        if (image->raw[n] < threshold){
+            image->raw[n] = 0;
         }else {
-            image[n] = 255;
+            image->raw[n] = 255;
         }
     }
 }
 
 
-void inverting(unsigned char* image, unsigned int imageSize){
+void inverting(Image* image){
     unsigned int n;
-    for (n = 0; n < imageSize; n++){
-        image[n] = 255 - image[n];
+    for (n = 0; n < image->size; n++){
+        image->raw[n] = 255 - image->raw[n];
     }
 }
  
