@@ -9,13 +9,7 @@ main(){
     
     Bmpfileheader bmpFileHeader; //our bitmap file header
     unsigned char *bitmapData;
-    /*unsigned char *outBitmapData;
-    unsigned char *mask;
-    unsigned char *enhanced;
-    int n;
-    int m;
-    int sum;
-    int height, width;*/
+    
     char filename[] = "lena512.bmp";
 	char filethreshold[] = "threshold.bmp";
 	char fileinvert[] = "invert.bmp";
@@ -54,16 +48,7 @@ main(){
     gammaTransformation(0.1, 255, bitmapData, bmpInfoHeader.bmp_bytesz);  
     SaveBitmapFile(filegamma2, &bmpInfoHeader, &bmpFileHeader, bitmapData);
     free(bitmapData);
-    /*bitmapData = (unsigned char*) LoadBitmapFile("lena512.bmp", &bmpInfoHeader, &bmpFileHeader);
-    for (n = 0; n < bmpInfoHeader.bmp_bytesz; n++){
-        bitmapData[n] = 255 - bitmapData[n];
-    }
-    SaveBitmapFile("output2.bmp", &bmpInfoHeader, &bmpFileHeader, bitmapData);
-    free(bitmapData);
-
-
-    
-
+    /*
     bitmapData = (unsigned char*) LoadBitmapFile("lena512.bmp", &bmpInfoHeader, & bmpFileHeader);
     height = bmpInfoHeader.height;
     width = bmpInfoHeader.width;
