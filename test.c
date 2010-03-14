@@ -25,6 +25,7 @@ main(){
 	char fileaverage1[]= "average1.bmp";
 	char fileaverage2[]= "average2.bmp";
 	char fileaverage3[]= "average3.bmp";
+
 	
 
     image = LoadBitmapFile(filename ,&bmpInfoHeader, &bmpFileHeader); 
@@ -80,6 +81,16 @@ main(){
 	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
 	averaging(19, image);
 	SaveBitmapFile(fileaverage3, &bmpInfoHeader, &bmpFileHeader, image->raw);
+
+	
+	char filethreshold12[] = "threshold2.bmp";
+	Point mypoint;
+	mypoint.threshold = 128;	
+	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
+	pointProcessing(image, &mypoint, &threshold);
+	SaveBitmapFile(filethreshold12, &bmpInfoHeader, &bmpFileHeader, image->raw);
+
+		
 	
     /*
     bitmapData = (unsigned char*) LoadBitmapFile("lena512.bmp", &bmpInfoHeader, & bmpFileHeader);

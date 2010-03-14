@@ -6,6 +6,21 @@
 #define EULER 2.7182818284
 
 
+void pointProcessing(Image* image, Point* functionConst, unsigned char (*function)(unsigned char, Point*)){
+	unsigned int n;
+		for (n = 0; n < image->size; n++){
+			image->raw[n] = (*function)(image->raw[n], functionConst);
+		}
+}
+
+unsigned char threshold(unsigned char input, Point* functionConst){
+	if (input < functionConst->threshold){
+		return 0;
+	} else {
+		return 255;
+	}
+}
+
 void thresholding(int threshold, Image* image){
     unsigned int n;
     for (n = 0; n < image->size; n++){
