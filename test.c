@@ -8,58 +8,53 @@ int main(void);
 
 int
 main(){
-    Bmpfileinfo bmpInfoHeader;
-    
-    Bmpfileheader bmpFileHeader; //our bitmap file header
+    Bmpfileinfo bmpInfoHeader; 
+    Bmpfileheader bmpFileHeader; 
     Image* image;
 	Image* newImage;
     
     char filename[] = "lena512.bmp";
+	
 	char filethreshold[] = "threshold.bmp";
+	Point mypoint;
+	mypoint.threshold = 128;	
+	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
+	pointProcessing(image, &mypoint, &threshold);
+	SaveBitmapFile(filethreshold, &bmpInfoHeader, &bmpFileHeader, image->raw);
+	release(image);
+
 	char fileinvert[] = "invert.bmp";
+	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
+	pointProcessing(image, NULL, &invert);
+	SaveBitmapFile(fileinvert, &bmpInfoHeader, &bmpFileHeader, image->raw);
+	release(image);
+	
 	char filelog[] = "logtrans.bmp";
+    image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
+	pointProcessing(image, NULL, &logTransformation);
+    SaveBitmapFile(filelog, &bmpInfoHeader, &bmpFileHeader, image->raw);
+    release(image); 
+
 	char fileinvlog[] = "invlogtrans.bmp";
-	char filegamma1[] = "gammatrans1.bmp";
-	char filegamma2[] = "gammatrans2.bmp";
-	char filepadding[]= "padding.bmp";
+    image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
+	pointProcessing(image, NULL, &inverseLogTransformation);
+    SaveBitmapFile(fileinvlog, &bmpInfoHeader, &bmpFileHeader, image->raw);
+    release(image);
+
+	char filegamma[] = "gammatrans1.bmp";
+    image = LoadBitmapFile(filename,&bmpInfoHeader, &bmpFileHeader); 
+	mypoint.gamma = 10;
+	pointProcessing(image, &mypoint, &gammaTransformation); 
+    SaveBitmapFile(filegamma, &bmpInfoHeader, &bmpFileHeader, image->raw);
+    release(image);
+
+	
+
+	char filepadding[] = "padding.bmp";
 	char fileaverage1[]= "average1.bmp";
 	char fileaverage2[]= "average2.bmp";
 	char fileaverage3[]= "average3.bmp";
 
-	
-
-    image = LoadBitmapFile(filename ,&bmpInfoHeader, &bmpFileHeader); 
-    thresholding(128, image);  
-    SaveBitmapFile(filethreshold, &bmpInfoHeader, &bmpFileHeader, image->raw);
-    release(image);
-
-    image = LoadBitmapFile(filename,&bmpInfoHeader, &bmpFileHeader); 
-    inverting(image);  
-    SaveBitmapFile(fileinvert, &bmpInfoHeader, &bmpFileHeader, image->raw);
-    release(image);
-
-	
-    image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
-    logTransformation(image);  
-    SaveBitmapFile(filelog, &bmpInfoHeader, &bmpFileHeader, image->raw);
-    release(image); 
-
-    image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
-    inverseLogTransformation(image);  
-    SaveBitmapFile(fileinvlog, &bmpInfoHeader, &bmpFileHeader, image->raw);
-    release(image);
-
-
-    image = LoadBitmapFile(filename,&bmpInfoHeader, &bmpFileHeader); 
-    gammaTransformation(10, image);  
-    SaveBitmapFile(filegamma1, &bmpInfoHeader, &bmpFileHeader, image->raw);
-    release(image);
-
-    image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
-    gammaTransformation(0.1, image);  
-    SaveBitmapFile(filegamma2, &bmpInfoHeader, &bmpFileHeader, image->raw);
-    release(image);
-	
 	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
     newImage = padding(20, image);  
 	bmpFileHeader.filesz = bmpFileHeader.bmpdata_offset + newImage->size;
@@ -73,25 +68,21 @@ main(){
 	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
 	averaging(5, image);
 	SaveBitmapFile(fileaverage1, &bmpInfoHeader, &bmpFileHeader, image->raw);
+	release(image);
 
 	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
 	averaging(13, image);
 	SaveBitmapFile(fileaverage2, &bmpInfoHeader, &bmpFileHeader, image->raw);
+	release(image);
 
 	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
 	averaging(19, image);
 	SaveBitmapFile(fileaverage3, &bmpInfoHeader, &bmpFileHeader, image->raw);
-
+	release(image);
 	
-	char filethreshold12[] = "threshold2.bmp";
-	Point mypoint;
-	mypoint.threshold = 128;	
-	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
-	pointProcessing(image, &mypoint, &threshold);
-	SaveBitmapFile(filethreshold12, &bmpInfoHeader, &bmpFileHeader, image->raw);
 
-		
-	
+
+			
     /*
     bitmapData = (unsigned char*) LoadBitmapFile("lena512.bmp", &bmpInfoHeader, & bmpFileHeader);
     height = bmpInfoHeader.height;

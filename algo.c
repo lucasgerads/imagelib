@@ -13,6 +13,8 @@ void pointProcessing(Image* image, Point* functionConst, unsigned char (*functio
 		}
 }
 
+
+
 unsigned char threshold(unsigned char input, Point* functionConst){
 	if (input < functionConst->threshold){
 		return 0;
@@ -21,25 +23,31 @@ unsigned char threshold(unsigned char input, Point* functionConst){
 	}
 }
 
-void thresholding(int threshold, Image* image){
-    unsigned int n;
-    for (n = 0; n < image->size; n++){
-        if (image->raw[n] < threshold){
-            image->raw[n] = 0;
-        }else {
-            image->raw[n] = 255;
-        }
-    }
+unsigned char invert(unsigned char input, Point* functionConst){
+	return (unsigned char)(255 - input);
 }
 
-
-void inverting(Image* image){
-    unsigned int n;
-    for (n = 0; n < image->size; n++){
-        image->raw[n] = (unsigned char) (255 - image->raw[n]);
-    }
+unsigned char inverseLogTransformation(unsigned char input, Point* functionConst){
+	double normalizedRange = 255.0;
+	double normalizedImage;
+	normalizedImage = (double)input/normalizedRange;
+	return (unsigned char) (normalizedRange * (exp(normalizedImage)-1)/EULER);
 }
- 
+
+unsigned char logTransformation(unsigned char input, Point* functionConst){
+	double normalizedRange = 255.0;
+	double normalizedImage;
+	normalizedImage = (double)input/normalizedRange;
+	return (unsigned char) normalizedRange * log((EULER-1)*normalizedImage + 1);
+}
+
+unsigned char gammaTransformation(unsigned char input, Point* functionConst){
+	double normalizedRange = 255.0;
+	double normalizedImage;
+	normalizedImage = (double)input/normalizedRange;
+	return (unsigned char)(normalizedRange * pow(normalizedImage, functionConst->gamma));
+}
+
 
 void averaging(unsigned maskSize, Image* image){
 	unsigned n,m;
@@ -69,44 +77,13 @@ void averaging(unsigned maskSize, Image* image){
 
 
 //logs are not correct
-void logTransformation(Image* image){
-    unsigned int n;
-    double result;
-    double normalizedRange = 255.0;
-    double normalizedImage;
-    for (n = 0; n < image->size; n++){ 
-        normalizedImage = (double)image->raw[n]/normalizedRange;
-        result = normalizedRange * log((EULER-1)*normalizedImage + 1);
-        //printf("image: %f result: %f\n",normalizedImage,result);
-        image->raw[n] = (unsigned char) result;
-    }
-}
 
 
-void inverseLogTransformation(Image* image){
-    unsigned int n;
-    double normalizedRange = 255.0;
-    double normalizedImage;
-    double result;
-    for (n = 0; n < image->size; n++){
-        normalizedImage = (double)image->raw[n]/normalizedRange;
-        result = normalizedRange * (exp(normalizedImage)-1)/EULER;
-        image->raw[n] = (unsigned char) result;
-    }
-} 
+
+ 
 
 
-void gammaTransformation(double gammaConst, Image* image){
-    unsigned int n;
-    double normalizedRange = 255.0;
-    double normalizedImage; 
-    double result;
-    for (n = 0; n < image->size; n++){
-        normalizedImage = (double) image->raw[n]/normalizedRange;
-        result = normalizedRange * pow(normalizedImage, gammaConst);
-        image->raw[n] = (unsigned char) result; 
-    }
-}
+
 
 
 
