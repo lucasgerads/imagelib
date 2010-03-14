@@ -43,10 +43,10 @@ Image* LoadBitmapFile(char *filename, Bmpfileinfo *bmpInfoHeader, Bmpfileheader 
     printf("imprtnt colors:\t%08lX\n", (unsigned long)bmpInfoHeader->nimpcolors);
 
       
-    printf("fileptr: %p\n",filePtr);
+    /*printf("fileptr: %p\n",filePtr);*/
     fseek(filePtr, (long int)bmpFileHeader->bmpdata_offset, SEEK_SET);
     
-    printf("fileptr: %p\n",filePtr);
+    /*printf("fileptr: %p\n",filePtr);*/
     rawImage = (unsigned char*)malloc(bmpInfoHeader->bmp_bytesz);
     fread(rawImage,1,bmpInfoHeader->bmp_bytesz, filePtr); 
     fclose(filePtr);

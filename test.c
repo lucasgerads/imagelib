@@ -59,7 +59,7 @@ main(){
 	bmpInfoHeader.width = newImage->width;
 	bmpInfoHeader.height = newImage->height;
 	bmpInfoHeader.bmp_bytesz = newImage->size;		
-    SaveBitmapFile(padding, &bmpInfoHeader, &bmpFileHeader, newImage->raw);
+    SaveBitmapFile(filepadding, &bmpInfoHeader, &bmpFileHeader, newImage->raw);
 	release(newImage);
     release(image);
 	
