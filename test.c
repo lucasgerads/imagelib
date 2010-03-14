@@ -55,10 +55,12 @@ main(){
 	
 	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
     newImage = padding(20, image);  
+	bmpFileHeader.filesz = bmpFileHeader.bmpdata_offset + newImage->size;
 	bmpInfoHeader.width = newImage->width;
 	bmpInfoHeader.height = newImage->height;
 	bmpInfoHeader.bmp_bytesz = newImage->size;		
     SaveBitmapFile(padding, &bmpInfoHeader, &bmpFileHeader, newImage->raw);
+	release(newImage);
     release(image);
 	
 	/*

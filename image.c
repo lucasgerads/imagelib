@@ -55,9 +55,25 @@ Image* padding(unsigned padSize, Image* image){
 		for(x = 0; x < newImage->width; x++){
 			if((x > padSize) && (y > padSize) && (x < newImage->width - padSize) && (y < newImage->height - padSize)){
 				set(newImage, x, y, (unsigned char)get(image, x - padSize, y - padSize));
-			} else{
-				/*missing meaningful padding*/
-				set(newImage, x, y, 0);
+
+			} else if((x > padSize) && (y <= padSize) && (x < newImage->width - padSize)) {
+				/*bottom (i think this should be top)*/
+				set(newImage, x, y, (unsigned char)get(image, x - padSize, 0));
+
+			} else if((x > padSize) && (x < newImage->width - padSize) && (y >= newImage->height - padSize)){
+				/*top (this should be the bottom)*/
+				set(newImage, x, y, (unsigned char)get(image, x - padSize, image->height - 1));
+
+			} else if((x <= padSize) && (y > padSize) && (y < newImage->height - padSize)){		
+				/*left*/
+				set(newImage, x, y, (unsigned char)get(image, 0, y - padSize));
+
+			} else if((y > padSize) && (x >= newImage->width - padSize) && (y < newImage->height - padSize)){	
+				/*right*/
+				set(newImage, x, y, (unsigned char)get(image, image->width - 1, y - padSize));
+	
+			} else {
+				set(newImage, x, y, 128);
 			}
 		}
 	}
