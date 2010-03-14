@@ -4,9 +4,9 @@
 
 
 Image* LoadBitmapFile(char *filename, Bmpfileinfo *bmpInfoHeader, Bmpfileheader *bmpFileHeader){
-    FILE *filePtr; //our file pointer
+    FILE *filePtr; 
     Bmpfilemagic bmpmagic;
-    unsigned char *rawImage;  //store image data
+    unsigned char *rawImage;  
 	Image* image;
 
     filePtr = fopen(filename,"rb");

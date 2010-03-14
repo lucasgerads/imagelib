@@ -21,13 +21,13 @@ void thresholding(int threshold, Image* image){
 void inverting(Image* image){
     unsigned int n;
     for (n = 0; n < image->size; n++){
-        image->raw[n] = (unsigned char) 255 - image->raw[n];
+        image->raw[n] = (unsigned char) (255 - image->raw[n]);
     }
 }
  
-
+/*
 void averaging(unsigned maskSize, Image* image){
-/*	unsigned int n,m;
+	unsigned int n,m;
 	int x,y;
 	unsigned int padSize; 	//padding that will be added on all sides of the image
 	Image* paddedImage;
@@ -47,9 +47,9 @@ void averaging(unsigned maskSize, Image* image){
 		}
 	}
 	release	
-*/
-}
 
+}
+*/
 
 
 

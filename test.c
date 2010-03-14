@@ -4,6 +4,8 @@
 #include "algo.h"
 #include "image.h"
 
+int main(void);
+
 int
 main(){
     Bmpfileinfo bmpInfoHeader;
