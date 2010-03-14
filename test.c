@@ -22,6 +22,7 @@ main(){
 	char filegamma1[] = "gammatrans1.bmp";
 	char filegamma2[] = "gammatrans2.bmp";
 	char filepadding[]= "padding.bmp";
+	char fileaverage[]= "average.bmp";
 
     image = LoadBitmapFile(filename ,&bmpInfoHeader, &bmpFileHeader); 
     thresholding(128, image);  
@@ -64,12 +65,11 @@ main(){
     SaveBitmapFile(filepadding, &bmpInfoHeader, &bmpFileHeader, newImage->raw);
 	release(newImage);
     release(image);
-	
-	/*
+		
 	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
-	averaging(mask, image);
+	averaging(10, image);
 	SaveBitmapFile(fileaverage, &bmpInfoHeader, &bmpFileHeader, image->raw);
-	*/
+	
     /*
     bitmapData = (unsigned char*) LoadBitmapFile("lena512.bmp", &bmpInfoHeader, & bmpFileHeader);
     height = bmpInfoHeader.height;

@@ -1,6 +1,7 @@
 #include "bmp.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "image.h"
 
 
 Image* LoadBitmapFile(char *filename, Bmpfileinfo *bmpInfoHeader, Bmpfileheader *bmpFileHeader){

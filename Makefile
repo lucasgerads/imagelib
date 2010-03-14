@@ -6,11 +6,12 @@ outputs = gammatrans1.bmp gammatrans2.bmp invert.bmp invlogtrans.bmp logtrans.bm
 ImageLib: $(objects)
 	gcc -lm $(objects) -o test
 
-test.o: bmp.h algo.h
-loadbmp.o: bmp.h
-savebmp.o: bmp.h
-algo.o: algo.h
+
 image.o:
+test.o: image.h bmp.h algo.h
+loadbmp.o: image.h bmp.h
+savebmp.o: bmp.h
+algo.o: image.h
 
 
 .PHONY: clean

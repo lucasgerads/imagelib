@@ -1,7 +1,7 @@
 #include "algo.h"
 #include <math.h>
 #include <stdio.h>
-
+#include "image.h"
 
 #define EULER 2.7182818284
 
@@ -25,31 +25,31 @@ void inverting(Image* image){
     }
 }
  
-/*
+
 void averaging(unsigned maskSize, Image* image){
-	unsigned int n,m;
-	int x,y;
+	unsigned n,m;
+	unsigned x,y;
 	unsigned int padSize; 	//padding that will be added on all sides of the image
 	Image* paddedImage;
-	int mask[] = (int*)malloc(sizeof(int)*maskSize*maskSize);
-	int sum;
-	padSize = = mask/2 - 1;
-	paddedImage = padding(image, padSize);
+	//int mask[] = (int*)malloc(sizeof(int)*maskSize*maskSize);
+	unsigned sum;
+	padSize =  maskSize/2 - 1;
+	paddedImage = padding(padSize,image);
 	for (m = 0; m < image->width; m++){
 		for ( n = 0; n < image->height; n++){
 			sum = 0;
 			for(x = 0; x < maskSize; x++){
 				for(y = 0; y < maskSize; y++){
-					sum += paddedImage[(x+m)*paddedImage->height + (y + n)];
+					sum = sum + paddedImage->raw[(x+m)*paddedImage->height + (y + n)];
 				}
 			}
-			image->raw[image->height*m + n];
+			sum = sum/(maskSize*maskSize);	
+			image->raw[image->height*m + n] = (unsigned char)sum;
 		}
 	}
-	release	
-
+	release(paddedImage);	
 }
-*/
+
 
 
 
