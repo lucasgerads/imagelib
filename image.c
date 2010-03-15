@@ -28,6 +28,10 @@ int get(Image* image,unsigned x,unsigned y){
 	}
 }
 
+unsigned char* getAddress(Image* image,unsigned x,unsigned y){
+	return &image->raw[x + image->width*y];	
+}
+
 int set(Image* image, unsigned x, unsigned y, unsigned char value){
 	if (x < image->width && y < image->height){	 
 		return image->raw[x + image->width*y] = value;

@@ -17,10 +17,9 @@ typedef struct tag_Mask{
 void averaging(unsigned mask, Image* image);
 
 
+void pointProcessing(Image* image, void* constant, unsigned char (*function)(unsigned char, void*));
 
-void pointProcessing(Image* image, Point* functionConst, unsigned char (*function)(unsigned char, Point*));
-
-void neighborhoodProcessing(Image* image, unsigned char (*function)(Image*, Mask*));
+void neighborhoodProcessing(Image* image, unsigned maskSize, unsigned char (*function)(Image*));
 
 
 
@@ -28,13 +27,18 @@ void neighborhoodProcessing(Image* image, unsigned char (*function)(Image*, Mask
 /***************functions for point processing***************************************/
 unsigned char threshold(unsigned char input, Point* functionConst);
 
-unsigned char invert(unsigned char input, Point* functionConst);
+unsigned char invert(unsigned char input, void* voidPtr);
 
-unsigned char inverseLogTransformation(unsigned char input, Point* functionConst);
+unsigned char inverseLogTransformation(unsigned char input, void* voidPtr);
 
-unsigned char logTransformation(unsigned char input, Point* functionConst);
+unsigned char logTransformation(unsigned char input, void* voidPtr);
 
 unsigned char gammaTransformation(unsigned char input, Point* functionConst);
+/***********************************************************************************/
+
+
+/*************functions for neighborhood processing*********************************/
+unsigned char average(Image* image);
 /***********************************************************************************/
 
 #endif

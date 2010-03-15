@@ -25,7 +25,7 @@ main(){
 
 	char fileinvert[] = "invert.bmp";
 	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
-	pointProcessing(image, NULL, &invert);
+	pointProcessing(image,NULL,&invert);
 	SaveBitmapFile(fileinvert, &bmpInfoHeader, &bmpFileHeader, image->raw);
 	release(image);
 	
@@ -37,7 +37,7 @@ main(){
 
 	char fileinvlog[] = "invlogtrans.bmp";
     image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
-	pointProcessing(image, NULL, &inverseLogTransformation);
+	pointProcessing(image,NULL, &inverseLogTransformation);
     SaveBitmapFile(fileinvlog, &bmpInfoHeader, &bmpFileHeader, image->raw);
     release(image);
 
@@ -51,7 +51,6 @@ main(){
 	
 
 	char filepadding[] = "padding.bmp";
-	char fileaverage1[]= "average1.bmp";
 	char fileaverage2[]= "average2.bmp";
 	char fileaverage3[]= "average3.bmp";
 
@@ -64,12 +63,15 @@ main(){
     SaveBitmapFile(filepadding, &bmpInfoHeader, &bmpFileHeader, newImage->raw);
 	release(newImage);
     release(image);
-		
+	
+	
+	char fileaverage1[]= "average1.bmp";
 	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
-	averaging(5, image);
+	neighborhoodProcessing(image, 5, &average);
 	SaveBitmapFile(fileaverage1, &bmpInfoHeader, &bmpFileHeader, image->raw);
 	release(image);
 
+	/*
 	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
 	averaging(13, image);
 	SaveBitmapFile(fileaverage2, &bmpInfoHeader, &bmpFileHeader, image->raw);
@@ -79,7 +81,7 @@ main(){
 	averaging(19, image);
 	SaveBitmapFile(fileaverage3, &bmpInfoHeader, &bmpFileHeader, image->raw);
 	release(image);
-	
+	*/	
 
 
 			

@@ -13,4 +13,5 @@ void release(Image* image);
 int get(Image* image, unsigned x, unsigned y);
 int set(Image* image, unsigned x, unsigned y, unsigned char value);
 Image* padding(unsigned padSize, Image* image);
+unsigned char* getAddress(Image* image,unsigned x,unsigned y);
 #endif
