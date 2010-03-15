@@ -51,9 +51,6 @@ main(){
 	
 
 	char filepadding[] = "padding.bmp";
-	char fileaverage2[]= "average2.bmp";
-	char fileaverage3[]= "average3.bmp";
-
 	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
     newImage = padding(20, image);  
 	bmpFileHeader.filesz = bmpFileHeader.bmpdata_offset + newImage->size;
@@ -70,6 +67,19 @@ main(){
 	neighborhoodProcessing(image, 5, &average);
 	SaveBitmapFile(fileaverage1, &bmpInfoHeader, &bmpFileHeader, image->raw);
 	release(image);
+
+	char fileaverage2[]= "average2.bmp";
+	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
+	neighborhoodProcessing(image, 10, &average);
+	SaveBitmapFile(fileaverage2, &bmpInfoHeader, &bmpFileHeader, image->raw);
+	release(image);
+
+	char fileaverage3[]= "average3.bmp";
+	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
+	neighborhoodProcessing(image, 15, &average);
+	SaveBitmapFile(fileaverage3, &bmpInfoHeader, &bmpFileHeader, image->raw);
+	release(image);
+
 
 	/*
 	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 

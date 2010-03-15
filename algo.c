@@ -13,16 +13,17 @@ void pointProcessing(Image* image, void* constant, unsigned char (*function)(uns
 	}
 }
 
-void neighborhoodProcessing(Image* image, unsigned maskSize, unsigned char (*function)(Image*)){
+void neighborhoodProcessing(Image* image, unsigned maskSize, unsigned char (*function)(SubImage*)){
 	unsigned n,m;
 	unsigned padSize;
-	Image* paddedImage;
-	Image subImage;
+	Image* paddedImage;		
+	padSize = maskSize/2 - 1;
+	paddedImage = padding(padSize,image);
+	SubImage subImage;
 	subImage.width = maskSize;
 	subImage.height = maskSize;
 	subImage.size = maskSize * maskSize;
-	padSize = maskSize/2 - 1;
-	paddedImage = padding(padSize,image);
+	subImage.parent = paddedImage;
 	for (m = 0; m < image->width; m++){
 		for (n = 0; n < image->height; n++){
 			subImage.raw = getAddress(paddedImage, m, n); 
@@ -33,15 +34,15 @@ void neighborhoodProcessing(Image* image, unsigned maskSize, unsigned char (*fun
 	release(paddedImage);
 }
 
-unsigned char average(Image* image){
+unsigned char average(SubImage* image){
 	unsigned x,y;
 	int sum = 0;
 	for (x = 0; x < image->width; x++){
 		for (y = 0; y < image->height; y++){
-			sum = sum + get(image, x, y);	
+			sum = sum + getSub(image, x, y);	
 		}
 	}
-	sum = sum/(image->size);
+	sum = sum/(int)(image->size);
 	return (unsigned char)sum;	
 }
 

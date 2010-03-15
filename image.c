@@ -28,6 +28,14 @@ int get(Image* image,unsigned x,unsigned y){
 	}
 }
 
+int getSub(SubImage* image, unsigned x, unsigned y){
+	if (x < image->width && y < image->height){
+		return image->raw[x + image->parent->width*y];
+	} else {
+		return -1;
+	}
+}
+
 unsigned char* getAddress(Image* image,unsigned x,unsigned y){
 	return &image->raw[x + image->width*y];	
 }

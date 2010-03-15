@@ -19,7 +19,7 @@ void averaging(unsigned mask, Image* image);
 
 void pointProcessing(Image* image, void* constant, unsigned char (*function)(unsigned char, void*));
 
-void neighborhoodProcessing(Image* image, unsigned maskSize, unsigned char (*function)(Image*));
+void neighborhoodProcessing(Image* image, unsigned maskSize, unsigned char (*function)(SubImage*));
 
 
 
@@ -38,7 +38,7 @@ unsigned char gammaTransformation(unsigned char input, Point* functionConst);
 
 
 /*************functions for neighborhood processing*********************************/
-unsigned char average(Image* image);
+unsigned char average(SubImage* image);
 /***********************************************************************************/
 
 #endif
