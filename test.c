@@ -49,7 +49,7 @@ main(){
     release(image);
 
 	
-
+	/*This is just for testing! padding is only supposed to be called internally*/
 	char filepadding[] = "padding.bmp";
 	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
     newImage = padding(20, image);  
@@ -79,7 +79,7 @@ main(){
 	neighborhoodProcessing(image, 15, &average);
 	SaveBitmapFile(fileaverage3, &bmpInfoHeader, &bmpFileHeader, image->raw);
 	release(image);
-
+	
 
 	/*
 	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 

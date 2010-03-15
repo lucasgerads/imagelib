@@ -17,7 +17,7 @@ void neighborhoodProcessing(Image* image, unsigned maskSize, unsigned char (*fun
 	unsigned n,m;
 	unsigned padSize;
 	Image* paddedImage;		
-	padSize = maskSize/2 - 1;
+	padSize = maskSize/2;	//this will round down
 	paddedImage = padding(padSize,image);
 	SubImage subImage;
 	subImage.width = maskSize;
@@ -45,31 +45,6 @@ unsigned char average(SubImage* image){
 	sum = sum/(int)(image->size);
 	return (unsigned char)sum;	
 }
-
-/*
-void average(Image* image){
-	unsigned n,m;
-	unsigned x,y;
-	unsigned int padSize; 	//padding that will be added on all sides of the image
-	Image* paddedImage;
-	//int mask[] = (int*)malloc(sizeof(int)*maskSize*maskSize);
-	unsigned sum;
-	padSize =  maskSize/2 - 1;
-	paddedImage = padding(padSize,image);
-	for (m = 0; m < image->width; m++){
-		for ( n = 0; n < image->height; n++){
-			sum = 0;
-			for(x = 0; x < maskSize; x++){
-				for(y = 0; y < maskSize; y++){
-					sum = sum + paddedImage->raw[(x+m)*paddedImage->height + (y + n)];
-				}
-			}
-			sum = sum/(maskSize*maskSize);	
-			image->raw[image->height*m + n] = (unsigned char)sum;
-		}
-	}
-	release(paddedImage);	
-}*/
 
 
 unsigned char threshold(unsigned char input, Point* constant){

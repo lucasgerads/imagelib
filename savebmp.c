@@ -8,7 +8,7 @@ void SaveBitmapFile(char *filename, Bmpfileinfo *bmpInfoHeader, Bmpfileheader *b
     unsigned char empty = 0; 
     filePtr = fopen(filename, "wb");
     /*printf("fileptr: %p\n",filePtr);*/
-    printf("Offset: %x\n", bmpFileHeader->bmpdata_offset);
+    //printf("Offset: %x\n", bmpFileHeader->bmpdata_offset);
     //filePtr = filePtr - bmpFileHeader->bmpdata_offset; 
     
 
