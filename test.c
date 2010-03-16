@@ -16,10 +16,9 @@ main(){
     char filename[] = "lena512.bmp";
 	
 	char filethreshold[] = "threshold.bmp";
-	Point mypoint;
-	mypoint.threshold = 128;	
+	int myvalue = 128;	
 	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
-	pointProcessing(image, &mypoint, &threshold);
+	pointProcessing(image, &myvalue, &threshold);
 	SaveBitmapFile(filethreshold, &bmpInfoHeader, &bmpFileHeader, image->raw);
 	release(image);
 
@@ -43,11 +42,54 @@ main(){
 
 	char filegamma[] = "gammatrans1.bmp";
     image = LoadBitmapFile(filename,&bmpInfoHeader, &bmpFileHeader); 
-	mypoint.gamma = 10;
-	pointProcessing(image, &mypoint, &gammaTransformation); 
+	myvalue = 10;
+	pointProcessing(image, &myvalue, &gammaTransformation); 
     SaveBitmapFile(filegamma, &bmpInfoHeader, &bmpFileHeader, image->raw);
     release(image);
 
+	char fileplane1[] = "bitplane1.bmp";
+    image = LoadBitmapFile(filename,&bmpInfoHeader, &bmpFileHeader); 
+	myvalue = 128;
+	pointProcessing(image, &myvalue, &bitPlaneSlicing); 
+    SaveBitmapFile(fileplane1, &bmpInfoHeader, &bmpFileHeader, image->raw);
+    release(image);
+
+	char fileplane2[] = "bitplane2.bmp";
+    image = LoadBitmapFile(filename,&bmpInfoHeader, &bmpFileHeader); 
+	myvalue = 64;
+	pointProcessing(image, &myvalue, &bitPlaneSlicing); 
+    SaveBitmapFile(fileplane2, &bmpInfoHeader, &bmpFileHeader, image->raw);
+    release(image);
+
+	char fileplane3[] = "bitplane3.bmp";
+    image = LoadBitmapFile(filename,&bmpInfoHeader, &bmpFileHeader); 
+	myvalue = 32;
+	pointProcessing(image, &myvalue, &bitPlaneSlicing); 
+    SaveBitmapFile(fileplane3, &bmpInfoHeader, &bmpFileHeader, image->raw);
+    release(image);
+
+	char fileplane4[] = "bitplane4.bmp";
+    image = LoadBitmapFile(filename,&bmpInfoHeader, &bmpFileHeader); 
+	myvalue = 16;
+	pointProcessing(image, &myvalue, &bitPlaneSlicing); 
+    SaveBitmapFile(fileplane4, &bmpInfoHeader, &bmpFileHeader, image->raw);
+    release(image);
+
+	char fileplane5[] = "bitplane5.bmp";
+    image = LoadBitmapFile(filename,&bmpInfoHeader, &bmpFileHeader); 
+	myvalue = 8;
+	pointProcessing(image, &myvalue, &bitPlaneSlicing); 
+    SaveBitmapFile(fileplane5, &bmpInfoHeader, &bmpFileHeader, image->raw);
+    release(image);
+
+
+    image = LoadBitmapFile(filename,&bmpInfoHeader, &bmpFileHeader); 	
+	Histogram *myhisto = createHistogram(image);
+	/*for (int n = 0; n < 256; n++){
+		printf("%d:  %d\n", n, myhisto->data[n]);
+	}*/	
+	free(myhisto);
+    release(image);
 	
 	/*This is just for testing! padding is only supposed to be called internally*/
 	char filepadding[] = "padding.bmp";
@@ -79,7 +121,18 @@ main(){
 	neighborhoodProcessing(image, 15, &average);
 	SaveBitmapFile(fileaverage3, &bmpInfoHeader, &bmpFileHeader, image->raw);
 	release(image);
+
+	char filemax[]= "max.bmp";
+	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
+	neighborhoodProcessing(image, 3, &maximum);
+	SaveBitmapFile(filemax, &bmpInfoHeader, &bmpFileHeader, image->raw);
+	release(image);
 	
+	char filemedian[]= "median.bmp";
+	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
+	neighborhoodProcessing(image, 15, &median);
+	SaveBitmapFile(filemedian, &bmpInfoHeader, &bmpFileHeader, image->raw);
+	release(image);
 
 	/*
 	image = LoadBitmapFile(filename, &bmpInfoHeader, &bmpFileHeader); 
