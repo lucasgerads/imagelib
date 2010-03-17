@@ -83,12 +83,14 @@ main(){
     release(image);
 
 
+	
+	char filehisto[] = "histoequal.bmp";
     image = LoadBitmapFile(filename,&bmpInfoHeader, &bmpFileHeader); 	
 	Histogram *myhisto = createHistogram(image);
-	/*for (int n = 0; n < 256; n++){
-		printf("%d:  %d\n", n, myhisto->data[n]);
-	}*/	
+	equalizationLookUp(myhisto); 
+	pointProcessing(image, myhisto, &useLookUp);
 	free(myhisto);
+	SaveBitmapFile(filehisto, &bmpInfoHeader, &bmpFileHeader, image->raw);
     release(image);
 	
 	/*This is just for testing! padding is only supposed to be called internally*/

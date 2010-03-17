@@ -50,6 +50,21 @@ Histogram* createHistogram(Image* image){
 	return newHistogram;
 }
 
+void equalizationLookUp(Histogram* histo){
+	unsigned n;
+	double sum = 0;
+	for (n = 0; n < 256; n++){
+		sum = sum + histo->normalizedData[n];
+		histo->transformation[n] = 255 * sum;
+		histo->lookUp[n] = (int) floor(histo->transformation[n]);	
+	}
+}
+
+unsigned char useLookUp(unsigned char input, void* lookUpTable){
+	Histogram myhist = *(Histogram*) lookUpTable;
+	return (unsigned char)myhist.lookUp[(int)input];
+}
+
 unsigned char average(SubImage* image){
 	unsigned x,y;
 	int sum = 0;
@@ -141,36 +156,4 @@ unsigned char bitPlaneSlicing(unsigned char input, void* value){
 	int planeValue = *(int*)value;
 	return (unsigned char)(input & planeValue);
 }
-
-
-
-
-
-//logs are not correct
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
